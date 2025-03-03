@@ -17,18 +17,21 @@ const sampleDataForPhotoListItem = {
 };
 
 const App = () => {
-  
   const { username, location, imageSource, id, profile} = sampleDataForPhotoListItem;
+  const photos = new Array(3).fill(sampleDataForPhotoListItem);
 
   return (
     <div className="App">
-      <PhotoListItem
-        username={username}
-        imageSource={imageSource}
-        id={id}
-        location={location}
-        profile={profile}
-      />
+      {photos.map((photo, index) => (
+        <PhotoListItem
+          key={index}
+          username={photo.username}
+          imageSource={photo.imageSource}
+          id={photo.id}
+          location={photo.location}
+          profile={photo.profile}
+        />  
+      ))}
     </div>
   );
 };
