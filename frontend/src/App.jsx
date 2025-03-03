@@ -1,23 +1,7 @@
 import React from 'react';
-import PhotoListItem from './components/PhotoListItem';
 import PhotoList from './components/PhotoList';
-import TopicListItem from './components/TopicListItem';
+import TopicList from './components/TopicList';
 import './App.scss';
-
-const sampleDataForTopicListItem = [
-  {
-    id: 1,
-    label: "Nature",
-  },
-  {
-    id: 2,
-    label: "Travel",
-  },
-  {
-    id: 3,
-    label: "People",
-  },
-]
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
@@ -34,9 +18,7 @@ const App = () => {
           profile={photo.profile}
         />  
       ))*/}
-      {sampleDataForTopicListItem.map((topic) => (
-        <TopicListItem key={topic.id} topic={topic} />
-        ))}
+      <TopicList />
     </div>
   );
 };
