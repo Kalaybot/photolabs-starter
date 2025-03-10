@@ -1,12 +1,16 @@
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
-const PhotoListItem = ({ username, imageSource, id, location, profile, favourites, toggleFavourites }) => {
+const PhotoListItem = ({ username, imageSource, id, location, profile, favourites, toggleFavourites, openModal }) => {
   const isFavorited = favourites.includes(id);
+
+  const handleClick = () => {
+    openModal(id);
+  };
 
   return (
     <div className="photo-list__item" key={id}>
-      <div className="photo-list__image-container">
+      <div className="photo-list__image-container" onClick={handleClick}>
         <PhotoFavButton 
           isFavorited={isFavorited}
           toggleFavourites={toggleFavourites}
