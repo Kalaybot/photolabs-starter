@@ -3,6 +3,7 @@ import HomeRoute from './routes/HomeRoute';
 import './App.scss';
 import photos from './mocks/photos';
 import topics from './mocks/topics';
+import PhotoDetailsModal from './routes/PhotoDetailsModal';
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
@@ -10,6 +11,8 @@ const App = () => {
   const [photoData] = useState(photos);
   const [topicData] = useState(topics);
   const [favourites, setFavourites] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   const toggleFavourites = (photoId) => {
     setFavourites((prevFavourites) => 
@@ -19,14 +22,26 @@ const App = () => {
     );
   };
 
+  const openModal = (photoId) => {
+    setSelectedPhoto(photoId);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    selectedPhoto(null);
+  }
+
   return (
     <div className="App">
-     <HomeRoute 
-      photos={photoData} 
-      topics={topicData}
-      favourites={favourites}
-      toggleFavourites={toggleFavourites} 
-     />
+      <PhotoDetailsModal isOpen={isModalOpen} closeModal={closeModal} selectedPhoto={selectedPhoto} />
+      <HomeRoute 
+        photos={photoData} 
+        topics={topicData}
+        favourites={favourites}
+        toggleFavourites={toggleFavourites}
+        openModal={openModal}
+      />
     </div>
   );
 };
