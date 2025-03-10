@@ -9,10 +9,24 @@ const App = () => {
   
   const [photoData] = useState(photos);
   const [topicData] = useState(topics);
+  const [favourites, setFavourites] = useState([]);
+
+  const toggleFavourites = (photoId) => {
+    setFavourites((prevFavourites) => 
+      prevFavourites.includes(photoId) 
+        ? prevFavourites.filter((id) => id !== photoId) 
+        : [...prevFavourites, photoId]
+    );
+  };
 
   return (
     <div className="App">
-     <HomeRoute photos={photoData} topics={topicData} />
+     <HomeRoute 
+      photos={photoData} 
+      topics={topicData}
+      favourites={favourites}
+      toggleFavourites={toggleFavourites} 
+     />
     </div>
   );
 };
