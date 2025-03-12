@@ -24,7 +24,11 @@ const App = () => {
 
   const openModal = (photoId) => {
     const photo = photoData.find((photo) => photo.id === photoId);
-    setSelectedPhoto(photo);
+    const similarPhotos = photoData.filter((photo) => 
+      photo.id !== photoId && photo.topic === photo.topic
+    );
+
+    setSelectedPhoto({ ...photo, similarPhotos});
     setIsModalOpen(true);
   };
 
