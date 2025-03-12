@@ -2,7 +2,9 @@ import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 
 const PhotoDetailsModal = ({ isOpen, closeModal, selectedPhoto }) => {
-  if (!isOpen) return null;
+  if (!isOpen || !selectedPhoto) return null;
+
+  console.log("Slected Photo Data:", selectedPhoto);
 
   return (
     <div className="photo-details-modal">

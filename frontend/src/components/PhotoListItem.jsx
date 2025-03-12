@@ -5,7 +5,13 @@ const PhotoListItem = ({ username, imageSource, id, location, profile, favourite
   const isFavorited = favourites.includes(id);
 
   const handleClick = () => {
-    openModal(id);
+    openModal({
+      id,
+      username,
+      imageSource,
+      location,
+      profile
+    });
   };
 
   return (

@@ -23,13 +23,14 @@ const App = () => {
   };
 
   const openModal = (photoId) => {
-    setSelectedPhoto(photoId);
+    const photo = photoData.find((photo) => photo.id === photoId);
+    setSelectedPhoto(photo);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    selectedPhoto(null);
+    setSelectedPhoto(null);
   }
 
   return (
