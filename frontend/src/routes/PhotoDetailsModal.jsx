@@ -18,6 +18,22 @@ const PhotoDetailsModal = ({ photo, closeModal, favourites, toggleFavourites, se
     }
   }, [photo, closeModal]);
 
+  //Error Handling
+  if (!photo || !photo.id || !photo.urls || !photo.urls.full || !photo.user || !photo.user.name || !photo.user.profile || !photo.similar_photos) {
+    return (
+      <div className="photo-details-modal">
+        <div className="photo-details-modal__overlay" onClick={handleOverlayClick}>
+          <div className="photo-details-modal__content" onClick={(event) => event.stopPropagation()}>
+            <button className="photo-details-modal__close-button" onClick={closeModal}>
+              <img src={closeSymbol} alt="close symbol" />
+            </button>
+            <p className="photo-details-modal__error">Error: Photo details not found.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const location = photo. location ? `${photo.location.city}, ${photo.location.country}` : 'Unknown location';
 
   const isFavorited = favourites.includes(photo.id);
