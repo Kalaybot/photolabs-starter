@@ -1,9 +1,9 @@
 import "../styles/TopicListItem.scss";
 
-const TopicListItem = ({ title }) => {
+const TopicListItem = ({ topic, getPhotosByTopics }) => {
   return (
-    <div className="topic-list__item">
-      <span>{title}</span>
+    <div className="topic-list__item" onClick={() => getPhotosByTopics(topic.slug)}>
+      <span>{topic.title}</span>
     </div>
   );
 };

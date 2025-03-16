@@ -1,16 +1,20 @@
 import '../styles/HomeRoute.scss';
-import TopNavigation from '../components/TopNavigationBar';
+import TopNavigationBar from '../components/TopNavigationBar';
 import PhotoList from '../components/PhotoList';
 
-const HomeRoute = ({ photos, topics, favourites, toggleFavourites, openModal }) => {
+const HomeRoute = ({ photos, topics, favourites, toggleFavourites, setSelectedPhotoClick, getPhotosByTopics }) => {
   return (
     <div className="home-route">
-      <TopNavigation topics={topics} favourites={favourites} />
+      <TopNavigationBar
+        topics={topics}
+        favourites={favourites}
+        getPhotosByTopics={getPhotosByTopics}
+      />
       <PhotoList 
         photos={photos} 
         favourites={favourites}
         toggleFavourites={toggleFavourites}
-        openModal={openModal}
+        setSelectedPhotoClick={setSelectedPhotoClick}
       />
     </div>
   );
