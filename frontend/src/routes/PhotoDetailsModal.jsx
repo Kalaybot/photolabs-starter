@@ -31,12 +31,13 @@ const PhotoDetailsModal = ({ photo, closeModal, favourites, toggleFavourites, se
           </button>
           <div className="photo-details-modal__image-container">
             <div className="photo-details-modal__fav-icon">
-              <PhotoFavButton 
+              <PhotoFavButton
+                photoId={photo.id}
                 selected={isFavorited}
                 toggleFavourites={() => toggleFavourites(photo.id)}
               />
             </div>
-            <img className="photo-details-modal__image" src={photo.urls.regular} alt={`Selected photo by ${photo.user.name}`} />
+            <img className="photo-details-modal__image" src={photo.urls.full} alt={`Selected photo by ${photo.user.name}`} />
           </div>
           <div className="photo-details-modal__photographer-details">
             <img className="photo-details-modal__photographer-profile" src={photo.user.profile} alt={`Photo of ${photo.user.name}`} />
@@ -46,9 +47,7 @@ const PhotoDetailsModal = ({ photo, closeModal, favourites, toggleFavourites, se
             </div>
           </div>
           <h3 className="photo-details-modal__header">Similar Photos</h3>
-          {photo.similar_photos === undefined ? (
-            <p className="photo-details-modal__loading">Loading...</p>
-          ) : Object.values(photo.similar_photos).length > 0 ? (
+          {Object.values(photo.similar_photos).length > 0 ? (
             <PhotoList
               photos={Object.values(photo.similar_photos)}
               favourites={favourites}
