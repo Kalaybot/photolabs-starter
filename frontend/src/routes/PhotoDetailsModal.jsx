@@ -62,7 +62,8 @@ const PhotoDetailsModal = ({ photo, closeModal, favourites, toggleFavourites, se
               <p className="photo-details-modal__photographer-location">{location}</p>
             </div>
           </div>
-          <h3 className="photo-details-modal__header">Similar Photos</h3>
+          <hr></hr>
+          <h3 className="photo-details-modal__header">Related Photos</h3>
           {Object.values(photo.similar_photos).length > 0 ? (
             <PhotoList
               photos={Object.values(photo.similar_photos)}

@@ -1,18 +1,18 @@
 .photo-details-modal {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   box-shadow: 0 0 0 50vmax rgba(0,0,0,.5);
   position: absolute;
   top: 55%;
   left: 50%;
   transform: translate(-50%, -40%);
-  height: 80%;
-  width: 55%;
+  height: 120%;
+  width: 60%;
   overflow-y: scroll;
   border-radius: 12px;
 }
 
 .photo-details-modal__close-button {
-  background-color: white;
+  background-color: transparent;
   border: none;
   color: white;
   text-align: center;
@@ -20,8 +20,13 @@
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
-  margin-left: 16px;
-  margin-top: 16px;
+  z-index: 9999;
+  transition: transform 0.2s ease-in-out;
+  margin-top: 10px;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .photo-details-modal__images {
@@ -29,9 +34,29 @@
   margin-top: 8px;
 }
 
+.photo-details-modal__image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+  width: 100%;
+}
+
 .photo-details-modal__image {
-  max-width: 95%;
-  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  height: 500px;
+  object-fit: cover;
+  align-self: center;
+  max-height: 60vh;
+}
+
+.photo-details-modal__fav-icon {
+  position: absolute;
+  top: 10px;
+  left: 175px;
+  z-index: 10;
 }
 
 .photo-details-modal__top-bar {
@@ -46,12 +71,22 @@
 .photo-details-modal__photographer-details {
   display: flex;
   font-size: 16px;
+  align-items: center;
+}
+
+.photo-details-modal hr {
+  width: 90%;
+  height: 1px;
+  background-color: #ddd;
+  border: none;
+  margin: 24px;
 }
 
 .photo-details-modal__header {
   font-size: 18px;
   font-weight: 500;
   color: #1e1e1e;
+  margin-left: 30px;
   margin-top: 24px;
   margin-bottom: 24px;
   width: 90%;
@@ -60,13 +95,14 @@
 .photo-details-modal__photographer-location {
   color: #838383;
 }
+
 .photo-details-modal__photographer-profile {
   object-fit: cover;
   border-radius: 100%;
   vertical-align: middle;
-  margin-right: 8px;
-  width: 40px;
-  height: 40px;
+  margin-left: 30px;
+  width: 50px;
+  height: 50px;
 }
 
 .photo-details-modal__photographer-info {
@@ -74,4 +110,8 @@
   font-weight: 700;
   font-size: 12px;
   margin-left: 8px;
+}
+
+.photo-list__item {
+  background-color: #ddd;
 }

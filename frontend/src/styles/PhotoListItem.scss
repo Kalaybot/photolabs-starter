@@ -1,11 +1,19 @@
 div.photo-list__item {
-  margin: 24px;
-  padding: 8px;
+  margin: 24px auto;
+  width: 300px;
+  padding: 10px;
+  border: 1px;
   border-width: 0.5px;
   border-color: lightgray;
   border-style: solid;
-  border-radius: 8px;
-  max-width: fit-content;
+  border-radius: 16px;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+
+  .photo-list__item:hover {
+    transform: scale(1.01);
+  }
 
   img.photo-list__image {
     user-select: none;
@@ -17,10 +25,14 @@ div.photo-list__item {
 
   div.photo-list__user-details {
     display: flex;
+    padding: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    align-items: center;
 
     img.photo-list__user-profile {
       object-fit: cover;
-      border-radius: 100%;
+      border-radius: 50%;
       vertical-align: middle;
       margin-right: 8px;
       width: 40px;
@@ -33,7 +45,12 @@ div.photo-list__item {
       font-size: 12px;
       margin-left: 8px;
 
-      div.photo-list__user-location {
+      p.photo-list__username {
+        margin-bottom: 6px;
+        margin-top: 6px;
+      }
+
+      p.photo-list__user-location {
         color: #838383;
       }
     }
