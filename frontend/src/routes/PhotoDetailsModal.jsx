@@ -69,7 +69,7 @@ const PhotoDetailsModal = ({ photo, closeModal, favourites, toggleFavourites, se
               photos={Object.values(photo.similar_photos)}
               favourites={favourites}
               toggleFavourites={toggleFavourites}
-              setSelectedPhotoClick={setSelectedPhoto}
+              onPhotoClick={setSelectedPhoto}
             />
           ) : (
             <p className="photo-details-modal__error">No similar photos found.</p>

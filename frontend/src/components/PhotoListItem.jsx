@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
-const PhotoListItem = ({ photo, toggleFavourites, setSelectedPhotoClick, favourites}) => {
+const PhotoListItem = ({ photo, toggleFavourites, onPhotoClick, favourites}) => {
   const isFavorited = favourites.includes(photo.id);
 
   const handleToggleFav = useCallback(() => {
@@ -16,7 +16,7 @@ const PhotoListItem = ({ photo, toggleFavourites, setSelectedPhotoClick, favouri
         selected={isFavorited}
         toggleFavourites={handleToggleFav}
       />
-      <img className="photo-list__image" src={photo.urls.regular} alt={`Photo by ${photo.user.name}`} onClick={() => setSelectedPhotoClick(photo)} />
+      <img className="photo-list__image" src={photo.urls.regular} alt={`Photo by ${photo.user.name}`} onClick={() => onPhotoClick(photo)} />
       </div>
       <div className="photo-list__user-details">
         <img className="photo-list__user-profile" src={photo.user.profile} alt={`Profile of ${photo.user.name}`} />

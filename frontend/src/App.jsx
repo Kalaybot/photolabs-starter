@@ -8,16 +8,16 @@ const App = () => {
   
   const { state, setSelectedPhoto, toggleFavourites, onCloseModal, getPhotosByTopics } = useApplicationData();
 
-  const { photos, favourites, selectedPhoto } = state;
+  const { favourites, selectedPhoto } = state;
 
   return (
     <div className="App">
       <HomeRoute 
-        photos={photos} 
-        topics={state.topics}
+        photos={state.photoData} 
+        topics={state.topicData}
         favourites={favourites}
         toggleFavourites={toggleFavourites}
-        setSelectedPhotoClick={setSelectedPhoto}
+        onPhotoClick={setSelectedPhoto}
         getPhotosByTopics={getPhotosByTopics}
       />
 

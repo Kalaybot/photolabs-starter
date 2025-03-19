@@ -1,6 +1,16 @@
 import { useReducer, useEffect } from 'react';
-import photos from '../mocks/photos';
-import topics from '../mocks/topics';
+
+// API Base URL
+const apiUrl = 'http://localhost:8001';
+
+// Defining initial state
+const initialState = {
+  favourites: [],
+  selectedPhoto: null,
+  photoData:[],
+  topicData:[]
+};
+
 
 // Defining action types
 export const ACTIONS = {
@@ -16,9 +26,9 @@ export const ACTIONS = {
 function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.SET_PHOTO_DATA:
-      return { ...state, photos: action.photos };
+      return { ...state, photoData: action.payload };
     case ACTIONS.SET_TOPIC_DATA:
-      return { ...state, topics: action.topics };
+      return { ...state, topicData: action.payload };
     case ACTIONS.FAV_PHOTO_ADDED:
       return { ...state, favourites: [...state.favourites, action.photoId] };
     case ACTIONS.FAV_PHOTO_REMOVED:
@@ -33,22 +43,28 @@ function reducer(state, action) {
   }
 }
 
-// Defining initial state
-const initialState = {
-  photos: [],
-  topics: [],
-  favourites: [],
-  selectedPhoto: null,
-};
-
 // Defining custom hook
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // Fetching photos and topics data from API
   useEffect(() => {
-    dispatch({ type: ACTIONS.SET_PHOTO_DATA, photos });
-    dispatch({ type: ACTIONS.SET_TOPIC_DATA, topics });
-  }, []);
+    fetch(`${apiUrl}/api/photos`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Fetched photo data:", data);
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
+      })
+      .catch((error) => console.error("Error fetching photos:", error));
+
+    fetch(`${apiUrl}/api/topics`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Fetched topic data:", data);
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data });
+      })
+      .catch((error) => console.error("Error fetching topics:", error));
+  }, [apiUrl]);
 
   const setSelectedPhoto = (photo) => {
     dispatch({ type: ACTIONS.SELECT_PHOTO, photo });
