@@ -1,4 +1,5 @@
 import { useReducer, useEffect } from 'react';
+import axios from 'axios';
 
 // API Base URL
 const apiUrl = 'http://localhost:8001';
@@ -35,8 +36,6 @@ function reducer(state, action) {
       return { ...state, favourites: state.favourites.filter(id => id !== action.photoId) };
     case ACTIONS.SELECT_PHOTO:
       return { ...state, selectedPhoto: action.photo };
-    case ACTIONS.DISPLAY_PHOTO_DETAILS:
-      return { ...state, selectedPhoto: action.photo };
 
     default:
       throw new Error(`Attempted to reduce with unsupported action type: ${action.type}`);
@@ -49,49 +48,41 @@ const useApplicationData = () => {
 
   // Fetching photos and topics data from API
   useEffect(() => {
-    fetch(`${apiUrl}/api/photos`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Fetched photo data:", data);
-        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
+    Promise.all([
+      axios.get(`${apiUrl}/api/photos`),
+      axios.get(`${apiUrl}/api/topics`)
+    ])
+      .then(([photoRes, topicRes]) => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoRes.data });
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topicRes.data });
       })
-      .catch((error) => console.error("Error fetching photos:", error));
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
-    fetch(`${apiUrl}/api/topics`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Fetched topic data:", data);
-        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data });
-      })
-      .catch((error) => console.error("Error fetching topics:", error));
-  }, [apiUrl]);
-
-  const setSelectedPhoto = (photo) => {
-    dispatch({ type: ACTIONS.SELECT_PHOTO, photo });
-  };
-
-  const toggleFavourites = (photoId) => {
-    const isFav = state.favourites.includes(photoId);
-    dispatch({
-      type: isFav ? ACTIONS.FAV_PHOTO_REMOVED : ACTIONS.FAV_PHOTO_ADDED,
-      photoId,
-    });
-  };
-
-  const onCloseModal = () => {
-    dispatch({ type: ACTIONS.SELECT_PHOTO, photo: null });
-  };
-
+  // Fetching photos by topic
   const getPhotosByTopics = (topicId) => {
-    const filteredPhotos = photos.filter(photo => photo.topicId === topicId);
-    dispatch({ type: ACTIONS.SET_PHOTO_DATA, photos: filteredPhotos });
+    axios.get(`${apiUrl}/api/topics/photos/${topicId}`)
+      .then((response) => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: response.data });
+      })
+      .catch((error) => {
+        console.error("Error fetching photos by topic:", error);
+      });
   };
 
   return {
     state,
-    setSelectedPhoto,
-    toggleFavourites,
-    onCloseModal,
+    setSelectedPhoto: (photo) => dispatch({ type: ACTIONS.SELECT_PHOTO, photo}),
+    toggleFavourites: (photoId) => {
+      const isFav = state.favourites.includes(photoId);
+      dispatch({
+        type: isFav ? ACTIONS.FAV_PHOTO_REMOVED : ACTIONS.FAV_PHOTO_ADDED,
+        photoId
+      });
+    },
+    onCloseModal: () => dispatch({ type: ACTIONS.SELECT_PHOTO, photo: null }),
     getPhotosByTopics,
   };
 };
