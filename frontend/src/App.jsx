@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import HomeRoute from './routes/HomeRoute';
 import './App.scss';
 import PhotoDetailsModal from './routes/PhotoDetailsModal';

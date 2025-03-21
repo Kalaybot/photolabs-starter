@@ -3,14 +3,16 @@ import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
 const PhotoListItem = ({ photo, toggleFavourites, onPhotoClick, favourites}) => {
+  // Check if photo is favorited
   const isFavorited = favourites.includes(photo.id);
 
+  // Toggle favourite status
   const handleToggleFav = useCallback(() => {
     toggleFavourites(photo.id);
   }, [toggleFavourites, photo.id]);
 
   return (
-    <div className="photo-list__item" key={photo.id}>
+    <div className="photo-list__item">
       <div className="photo-list__image-container">
       <PhotoFavButton
         selected={isFavorited}
