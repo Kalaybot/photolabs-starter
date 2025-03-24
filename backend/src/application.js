@@ -12,6 +12,8 @@ const db = require("./db")
 
 const photos = require("./routes/photos");
 const topics = require("./routes/topics");
+// Search route for photos by username, location, or country
+const search = require("./routes/search");
 
 function read(file) {
   return new Promise((resolve, reject) => {
