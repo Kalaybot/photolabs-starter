@@ -1,6 +1,6 @@
 # Photolabs
 
-PhotoLabs is a React-based single-page application. It allows user to browse photos depending on topics available on the app. Adding and removing favourites is also one of the user experience. We built this on top of a pre-existing API for frontend which is built with React, backend is also provided and is powered by Node.js and Express with PostgreSQL database.
+PhotoLabs is a React-based single-page application. It allows user to browse photos depending on topics available on the app. Adding and removing favourites is also one of the user experience. We built this app on top of a pre-existing API for frontend which is built with React, backend is also provided and is powered by Node.js and Express with PostgreSQL database.
 
 ## Features
 
