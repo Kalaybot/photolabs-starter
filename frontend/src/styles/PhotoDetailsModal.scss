@@ -116,25 +116,6 @@
   background-color: #ddd;
 }
 
-@media screen and (max-width: 1440px) {
-  .photo-details-modal {
-    width: 50vw; 
-    max-width: 700px;
-    object-fit: cover;
-  }
-  .photo-details-modal__fav-icon {
-    top: 9px;
-    left: 35px;
-  }
-  .photo-details-modal__image {
-    max-width: 800px;
-  }
-  .photo-details-modal__close-button {
-    top: 10px;
-    left: 5px;
-  }
-}
-
 @media screen and (max-width: 1024px) {
   .photo-details-modal {
     width: 50vw; 
