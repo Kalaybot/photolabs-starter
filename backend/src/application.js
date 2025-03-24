@@ -40,6 +40,8 @@ module.exports = function application(
 
   app.use("/api", photos(db));
   app.use("/api", topics(db));
+  // Search route under /api path
+  app.use("/api", search(db));
 
   if (ENV === "development" || ENV === "test") {
     Promise.all([

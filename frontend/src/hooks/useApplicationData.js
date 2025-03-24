@@ -24,6 +24,8 @@ export const ACTIONS = {
   DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
   SET_PHOTO_BY_TOPIC: 'SET_PHOTO_BY_TOPIC',
   SET_ERROR: 'SET_ERROR',
+  // Action type for Search results
+  SET_SEARCH_RESULTS: 'SET_SEARCH_RESULTS',
 };
 
 // Defining reducer function
@@ -48,6 +50,10 @@ function reducer(state, action) {
       return { ...state, selectedPhoto: null, error: null, };
 
     case ACTIONS.SET_PHOTO_BY_TOPIC:
+      return { ...state, photoData: action.payload };
+
+    // reducer function for Search results
+    case ACTIONS.SET_SEARCH_RESULTS:
       return { ...state, photoData: action.payload };
 
     case ACTIONS.SET_ERROR:
@@ -91,7 +97,6 @@ const useApplicationData = () => {
       });
   };
 
-  
   // Fetch similar photos
   const getSimilarPhotos = (photoId) => {
     if (!state.photoData) return [];
@@ -118,12 +123,26 @@ const useApplicationData = () => {
     }
   };
 
+  // Search photos
+  const searchPhotos = (query) => {
+    dispatch({ type: ACTIONS.SET_ERROR, payload: null }); // Clearing error
+
+    axios.get(`${apiUrl}/api/search/${query}`)
+      .then((response) => {
+        dispatch({ type: ACTIONS.SET_SEARCH_RESULTS, payload: response.data });
+      })
+      .catch(() => {
+        dispatch({ type: ACTIONS.SET_ERROR, payload: 'Error searching photos' });
+      });
+  };
+
   return {
     state,
     getPhotosByTopics,
     setSelectedPhoto,
     onCloseModal,
     toggleFavourites,
+    searchPhotos, // Adding searchPhotos to the returned object
   };
 };
 
