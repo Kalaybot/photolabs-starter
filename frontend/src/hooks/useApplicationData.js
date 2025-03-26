@@ -9,6 +9,7 @@ const initialState = {
   favourites: [],
   selectedPhoto: null,
   photoData:[],
+  searchResults: [], // Adding searchResults to the initial state
   topicData:[],
   error: null,
 };
@@ -54,7 +55,7 @@ function reducer(state, action) {
 
     // reducer function for Search results
     case ACTIONS.SET_SEARCH_RESULTS:
-      return { ...state, photoData: action.payload };
+      return { ...state, searchResults: action.payload };
 
     case ACTIONS.SET_ERROR:
       return { ...state, error: action.payload };
@@ -127,7 +128,12 @@ const useApplicationData = () => {
   const searchPhotos = (query) => {
     dispatch({ type: ACTIONS.SET_ERROR, payload: null }); // Clearing error
 
-    axios.get(`${apiUrl}/api/search/${query}`)
+    if (!query.trim()) {
+      dispatch({ type: ACTIONS.SET_SEARCH_RESULTS, payload: [] });
+      return;
+    }
+
+    axios.get(`${apiUrl}/api/photos/search?query=${query}`)
       .then((response) => {
         dispatch({ type: ACTIONS.SET_SEARCH_RESULTS, payload: response.data });
       })
