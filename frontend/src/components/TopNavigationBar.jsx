@@ -1,11 +1,17 @@
 import '../styles/TopNavigationBar.scss'
 import FavBadge from './FavBadge';
+import SearchBar from './SearchBar';
 import TopicList from './TopicList';
 
-const TopNavigation = ({ topics, favourites, getPhotosByTopics }) => {
+const TopNavigation = ({ topics, favourites, getPhotosByTopics, searchPhotos }) => {
   return (
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs</span>
+
+      <div className="top-nav-bar-search">
+        <SearchBar searchPhotos={searchPhotos} />
+      </div>
+
       <TopicList 
         topics={topics}
         getPhotosByTopics={getPhotosByTopics}
