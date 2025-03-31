@@ -8,16 +8,22 @@ const TopNavigation = ({ topics, favourites, getPhotosByTopics, searchPhotos }) 
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs</span>
 
-      <div className="top-nav-bar-search">
-        <SearchBar searchPhotos={searchPhotos} />
-      </div>
-
+      <div className="top-nav-bar__topics">
       <TopicList 
         topics={topics}
         getPhotosByTopics={getPhotosByTopics}
       />
+      </div>
+
       <div className="top-nav-bar__actions">
-        <FavBadge isFavPhotoExist={favourites.length > 0}/>
+
+      <div className="top-nav-bar__search">
+        <SearchBar searchPhotos={searchPhotos} />
+      </div>
+
+      <div className="top-nav-bar__favourites">
+      <FavBadge isFavPhotoExist={favourites.length > 0}/>
+      </div>
       </div>
     </div>
   )
