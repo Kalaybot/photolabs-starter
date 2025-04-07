@@ -64,9 +64,9 @@ const PhotoDetailsModal = ({ photo, closeModal, favourites, toggleFavourites, se
           </div>
           <hr></hr>
           <h3 className="photo-details-modal__header">Related Photos</h3>
-          {Object.values(photo.similar_photos).length > 0 ? (
+          {photo.similar_photos && photo.similar_photos.length > 0 ? (
             <PhotoList
-              photos={Object.values(photo.similar_photos)}
+              photos={photo.similar_photos}
               favourites={favourites}
               toggleFavourites={toggleFavourites}
               onPhotoClick={setSelectedPhoto}

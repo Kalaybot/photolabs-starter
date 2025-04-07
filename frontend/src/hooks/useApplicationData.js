@@ -79,7 +79,7 @@ const useApplicationData = () => {
   }, []);
 
   // Fetching photos by topic
-  const getPhotosByTopics = (topicId) => {
+  const getPhotosByTopics = async (topicId) => {
     dispatch({ type: ACTIONS.SET_ERROR, payload: null }); // Clearing error
 
     axios.get(`${apiUrl}/api/topics/photos/${topicId}`)
@@ -95,11 +95,11 @@ const useApplicationData = () => {
   // Fetch similar photos
   const getSimilarPhotos = (photoId) => {
     if (!state.photoData) return [];
-    return state.photoData.filter((p) => p.id !== photoId).slice(0, 6);
+    return state.photoData.filter((p) => p.id !== photoId);
   };
 
   // Open selected photo modal
-  const setSelectedPhoto = (photo) => {
+  const setSelectedPhoto = async (photo) => {
     const newPhoto = { ...photo, similar_photos: getSimilarPhotos(photo.id) };
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: newPhoto });
   };
